@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <title>Main</title>
+        <meta name="description" content="OneUI - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
+        <meta name="author" content="pixelcave">
+        <meta name="robots" content="noindex, nofollow">
+        <meta property="og:title" content="OneUI - Bootstrap 4 Admin Template &amp; UI Framework">
+        <meta property="og:site_name" content="OneUI">
+        <meta property="og:description" content="OneUI - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
+        <meta property="og:type" content="website">
+        <link rel="shortcut icon" href="assets/media/favicons/favicon.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="assets/media/favicons/favicon-192x192.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/media/favicons/apple-touch-icon-180x180.png">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
+        <link rel="stylesheet" id="css-main" href="{% static 'assets/css/oneui.min.css' %}">
+
+    </head>
+    <body>
+        <div class="bg-sidebar-dark p-3 push">
+            <div class="d-lg-none">
+                <button type="button" class="btn btn-block btn-secondary d-flex justify-content-between align-items-center" data-toggle="class-toggle" data-target="#horizontal-navigation-click-centered-dark" data-class="d-none">
+                    Menu - Click Centered Dark
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+            <div id="horizontal-navigation-click-centered-dark" class="d-none d-lg-block mt-2 mt-lg-0">
+                <ul class="nav-main nav-main-horizontal nav-main-horizontal-right nav-main-dark justify-content-end">
+                    <li class="nav-main-item">
+                        <a class="nav-main-link active" href="{% url 'login' %}">
+                            <i class="nav-main-link-icon si si-login"></i>
+                            <span class="nav-main-link-name">Login</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link active" href="{% url 'signup' %}">
+                            <i class="nav-main-link-icon fa fa-home"></i>
+                            <span class="nav-main-link-name">SignUp</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed side-trans-enabled"><div id="page-overlay"></div>
+            <!-- Main Container -->
+            <main id="main-container">
+
+                <div class="content content-boxed">
+                    <div class="row">
+                        <div class="col-xl-8">
+                            <!-- Story -->
+                            {% for item in news %}
+                                <div class="block">
+                                    <div class="block-content">
+                                        <div class="row items-push">
+                                            <div class="col-md-4 col-lg-5">
+                                                <a href="be_pages_blog_story.html">
+                                                    {% if item.image %}
+                                                        <img class="img-fluid" src="{{ item.image.url }}" alt="">
+                                                    {% else %}
+                                                        <img class="img-fluid" src="{% static 'assets/media/photos/photo21.jpg' %}" alt="">
+                                                    {% endif %}
+                                                </a>
+                                            </div>
+                                            <div class="col-md-8 col-lg-7">
+                                                <h4 class="h3 mb-1">
+                                                    <a class="text-primary-dark" href="{% url 'details' id=item.id %}">{{ item.title }}</a>
+                                                </h4>
+                                                <div class="font-size-sm mb-3">
+                                                    <a href="#">{{ item.author }}</a> <em class="text-muted">{{item.created_at}}</em>
+                                                </div>
+                                                <p class="font-size-sm">
+                                                    {{ item.description }}
+                                                </p>
+                                                <a class="btn btn-sm btn-light" href="#">Continue Reading..</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <!-- END Story -->
+                        </div>
+                        <div class="col-xl-4">
+
+                        <!-- Social -->
+                        <div class="block">
+                            <div class="block-header block-header-default">
+                                <h3 class="block-title">Tags</h3>
+                            </div>
+                            <div class="block-content block-content-full">
+                                {% for tag in tags %}
+                                    <a class="btn btn-light js-tooltip-enabled m-2" href="{% url 'news.filter' tag_slug=tag.slug %}" data-toggle="tooltip" title="" data-original-title="Follow us on Twitter">
+                                        <i class="fa fa-plus"></i> <span class="text-sm m-2">{{tag.title}}</span>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- END Social -->
+                        </div>
+                    </div>
+                </div>
+                <!-- END Page Content -->
+
+            </main>
+            <!-- END Main Container -->
+        </div>
+       
+        <script src="assets/js/oneui.core.min.js"></script>
+        <script src="assets/js/oneui.app.min.js"></script>
+    
+    </body>
+</html>
